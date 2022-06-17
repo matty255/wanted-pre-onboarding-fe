@@ -9,10 +9,18 @@ const GlobalStyles = createGlobalStyle`
    outline:none;
    border:none;
    background-color: #fafafa;
+   max-width: 100%;
+   ion-icon {
+    font-size: 2rem;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
  }
- & > a {
-  text-decoration: none;
-}
+
 `;
 
 export default GlobalStyles;

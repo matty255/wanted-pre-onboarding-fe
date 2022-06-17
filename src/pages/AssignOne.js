@@ -48,29 +48,23 @@ const WrapBox = styled.div`
   width: 100%;
   max-width: 24.75rem;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 1.5rem;
   margin: 0 auto;
   @media only screen and (max-width: 450px) {
     margin: 0;
     padding: 0;
-    align-items: start;
-    justify-content: center;
   }
 `;
 
 const Container = styled.div`
   width: 100%;
   max-width: 93.5rem;
+  min-width: 22rem;
   margin: 1rem auto 0;
-  display: flex;
+
   @media only screen and (max-width: 450px) {
     margin: 0;
     padding: 0;
-    align-items: start;
-    justify-content: center;
   }
 `;
 
