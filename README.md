@@ -6,7 +6,6 @@
 ## 과제 참고 이미지
 [참고 이미지 링크](https://bclef25.notion.site/1ed6d5b2192b45eeb4104a67f6a77250)
 
----
 
 ## 진행 가이드
 
@@ -16,7 +15,6 @@
 
 # :: 과제 안내
 
----
 
 ## Assignment 1 - `Login`
 
@@ -70,9 +68,9 @@
 - Feed 더미 데이터는 최소 3개 이상
   - 이미지는 자유롭게 사용하시되 이미지들의 사이즈가 각각 달라야 합니다. (ex. 정사각형, 세로가 긴 것, 가로가 긴 것 등)
   - 필요하시면 아래의 url을 사용하세요.
-    "[https://source.unsplash.com/random/600x500](https://source.unsplash.com/random/600x500)"
-    "[https://source.unsplash.com/random/900x500](https://source.unsplash.com/random/900x500)"
-    "[https://source.unsplash.com/random/700x1080](https://source.unsplash.com/random/700x1080)"
+   - "[https://source.unsplash.com/random/600x500](https://source.unsplash.com/random/600x500)"
+   - "[https://source.unsplash.com/random/900x500](https://source.unsplash.com/random/900x500)"
+   - "[https://source.unsplash.com/random/700x1080](https://source.unsplash.com/random/700x1080)"
   - Feeds의 Image가 로딩된 후 컴포넌트가 로딩 되도록 Lazy Loading을 구현해 주세요.
 
 - 댓글기능 만들기
