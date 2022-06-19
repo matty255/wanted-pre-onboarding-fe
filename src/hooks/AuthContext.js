@@ -21,7 +21,14 @@ export function AuthProvider({ children }) {
   let signout = (callback) => {
     return fakeAuthProvider.signout(() => {
       setUser(null);
-      localStorage.removeItem('userData');
+      localStorage.setItem(
+        'userData',
+        JSON.stringify({
+          id: 'test01@test.test',
+          pwd: '!Qwe1234',
+          auth: false,
+        })
+      );
       callback();
     });
   };

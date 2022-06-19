@@ -10,6 +10,7 @@ import {
 import styled from 'styled-components';
 
 const PostCard = ({ data }) => {
+  const randomNumber = Math.floor(Math.random() * (1 - 10 + 1)) + 1;
   const { feed_index, image, nickname, profile_pic, like_count, comment } =
     data;
   return (
@@ -26,25 +27,31 @@ const PostCard = ({ data }) => {
         <img src={image} alt="" className="main-pic" />
 
         <PostBoxBottom>
-          <div className="left">
-            <ActionsBox>
-              <IonIcon icon={heartOutline}></IonIcon>
-              <IonIcon icon={chatbubbleOutline}></IonIcon>
-              <IonIcon icon={paperPlaneOutline}></IonIcon>
-            </ActionsBox>
-            <UserInfoBox>
-              <p>좋아요 {like_count}개</p>
-              <img
-                src={'https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031'}
-                alt=""
-              />
-              <p>반응형 웹 모바일 타블렛 모양 오케</p>
-            </UserInfoBox>
-          </div>
+          <PostBoxBottomTop>
+            <div className="left">
+              <ActionsBox>
+                <IonIcon icon={heartOutline}></IonIcon>
+                <IonIcon icon={chatbubbleOutline}></IonIcon>
+                <IonIcon icon={paperPlaneOutline}></IonIcon>
+              </ActionsBox>
 
-          <div className="right">
-            <IonIcon icon={bookmarkOutline}></IonIcon>
-          </div>
+              <p>좋아요 {like_count}개</p>
+            </div>
+
+            <div className="right">
+              <IonIcon icon={bookmarkOutline}></IonIcon>
+            </div>
+          </PostBoxBottomTop>
+          <CommentBox>
+            {comment.length > 0 &&
+              comment.map((comment, i) => (
+                <InnerBox key={`${i}-${randomNumber}`}>
+                  <img src={comment.profile_pic} alt="" />
+                  <p>{comment.username}</p>
+                  <p>{comment.comment_content}</p>
+                </InnerBox>
+              ))}
+          </CommentBox>
         </PostBoxBottom>
       </PostBox>
     </>
@@ -107,10 +114,14 @@ const UserProfile = styled.div`
 
 const PostBoxBottom = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  height: 76px;
+  flex-direction: column;
+`;
 
+const PostBoxBottomTop = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 76px;
   .left {
     margin: auto 18px;
   }
@@ -130,13 +141,23 @@ const ActionsBox = styled.div`
   }
 `;
 
-const UserInfoBox = styled.div`
-  display: flex;
+const UserInfoBox = styled.div``;
 
+const CommentBox = styled.div`
+  display: flex;
   align-items: center;
+  flex-direction: column;
+
+  align-items: start;
+`;
+
+const InnerBox = styled.div`
+  display: flex;
+  flex-direction: row;
 
   & > img {
-    margin-right: 5px;
+    margin: 0.2rem;
+    margin-top: 0;
     width: 20px;
     height: 20px;
   }
@@ -146,5 +167,6 @@ const UserInfoBox = styled.div`
     font-size: 14px;
     line-height: 16px;
     color: black;
+    margin-right: 0.5rem;
   }
 `;

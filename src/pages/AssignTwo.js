@@ -12,11 +12,12 @@ import {
   home,
   search,
   searchOutline,
+  logOutOutline,
 } from 'ionicons/icons';
 import InstaLogo from '../static/insta.png';
 
 import PostList from '../components/PostList';
-import PostCard from '../components/PostCard';
+import { useNavigate } from 'react-router-dom';
 import MainSideContentsCard from '../components/MainSideContentsCard';
 import { AuthStatus, useAuth } from '../hooks/AuthContext';
 
@@ -33,7 +34,7 @@ const throttle = function (callback, waitTime) {
 
 const AssignTwo = () => {
   let auth = useAuth();
-
+  let navigate = useNavigate();
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
 
@@ -75,7 +76,12 @@ const AssignTwo = () => {
             <IonIcon icon={addCircleOutline}></IonIcon>
             <IonIcon icon={compassOutline}></IonIcon>
             <IonIcon icon={heartOutline}></IonIcon>
-            <IonIcon icon={personOutline}></IonIcon>
+            <IonIcon
+              icon={logOutOutline}
+              onClick={() => {
+                auth.signout(() => navigate('/'));
+              }}
+            ></IonIcon>
           </NavBox>
         </NavBar>
 
@@ -84,7 +90,12 @@ const AssignTwo = () => {
 
           <img src={InstaLogo} alt="" className="logo" />
           <AuthStatus />
-          <IonIcon icon={paperPlaneOutline}></IonIcon>
+          <IonIcon
+            icon={logOutOutline}
+            onClick={() => {
+              auth.signout(() => navigate('/'));
+            }}
+          ></IonIcon>
         </MobileBar>
       </Header>
       <FlexContainer>

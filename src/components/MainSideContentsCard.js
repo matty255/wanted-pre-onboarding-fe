@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useAuth } from '../hooks/AuthContext';
 const MainSideContentsCard = () => {
+  let auth = useAuth();
   return (
     <>
       <SuggestionsBox>
@@ -14,8 +15,8 @@ const MainSideContentsCard = () => {
             className="user-pic"
           />
           <div className="user-name">
-            <p>유저입니다</p>
-            <span>프로필</span>
+            <p>{auth.user}</p>
+            <span>유저프로필</span>
           </div>
         </div>
 

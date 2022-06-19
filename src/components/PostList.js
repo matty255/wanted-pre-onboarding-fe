@@ -23,7 +23,7 @@ const PostList = () => {
       <ContentBox>
         {feedList.map((feed, i) => (
           <div key={`${i}-${feed.image}`}>
-            <PostCard img={'http://imgur.com/eQPPis3.gif'} data={feed} />
+            <PostCard data={feed} />
           </div>
         ))}
       </ContentBox>
