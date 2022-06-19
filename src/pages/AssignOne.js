@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InstaLogo from '../static/insta.png';
 import InstaApple from '../static/instaapple.png';
@@ -18,6 +18,25 @@ const AssignOne = () => {
     password: '',
   });
 
+  useEffect(() => {
+    if (localStorage.getItem('userData') === null)
+      return localStorage.setItem(
+        'userData',
+        JSON.stringify({
+          id: 'test01@test.test',
+          pwd: '!Qwe1234',
+          auth: false,
+        })
+      );
+  }, []);
+  // const isUserEmail =
+  //   JSON.parse(localStorage.getItem('userData')).id === id.current?.value
+  //     ? false
+  //     : true;
+  // const isUserPassword =
+  //   JSON.parse(localStorage.getItem('userData')).pwd === pwd.current?.value
+  //     ? false
+  //     : true;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setState((prevState) => ({
@@ -43,6 +62,7 @@ const AssignOne = () => {
     const isBlank = validateBlank(state, setErrorMsg, id, pwd);
     const isEmail = validateEmail(state, setErrorMsgEmail, id);
     const isPassword = validatePassword(state, setErrorMsgPassword, pwd);
+
     // console.log(isBlank);
     // console.log(isEmail);
     // console.log(isPassword);
@@ -52,8 +72,7 @@ const AssignOne = () => {
       localStorage.setItem(
         'userData',
         JSON.stringify({
-          id: id.current.value,
-          pwd: pwd.current.value,
+          auth: true,
         })
       );
 
@@ -68,9 +87,14 @@ const AssignOne = () => {
   return (
     <>
       {successMsg && <p className="successMsg">{successMsg}</p>}
-      {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+      {errorMsg && errorMsgEmail === '' && (
+        <p className="errorMsg">{errorMsg}</p>
+      )}
       {errorMsgEmail && <p className="errorMsg">{errorMsgEmail}</p>}
-      {errorMsgPassword && <p className="errorMsg">{errorMsgPassword}</p>}
+      {errorMsgPassword && errorMsgEmail === '' && (
+        <p className="errorMsg">{errorMsgPassword}</p>
+      )}
+
       <WrapBox>
         <Container>
           <FormBox>

@@ -61,7 +61,7 @@ export function RequireAuth({ children }) {
   let auth = useAuth();
   let location = useLocation();
 
-  if (!auth.user) {
+  if (JSON.parse(localStorage.getItem('userData')).auth === false) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
@@ -76,7 +76,7 @@ export function IsLogin({ children }) {
   let auth = useAuth();
   let location = useLocation();
 
-  if (auth.user) {
+  if (auth.user && JSON.parse(localStorage.getItem('userData')).auth === true) {
     return <Navigate to="/main" state={{ from: location }} replace />;
   }
 
