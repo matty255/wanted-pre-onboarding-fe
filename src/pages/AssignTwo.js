@@ -17,6 +17,7 @@ import InstaLogo from '../static/insta.png';
 
 import PostCard from '../components/PostCard';
 import MainSideContentsCard from '../components/MainSideContentsCard';
+import { AuthStatus, useAuth } from '../hooks/AuthContext';
 
 const throttle = function (callback, waitTime) {
   let timerId = null;
@@ -30,9 +31,11 @@ const throttle = function (callback, waitTime) {
 };
 
 const AssignTwo = () => {
+  let auth = useAuth();
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
   const documentRef = useRef(document);
+  // console.log(JSON.parse(localStorage.getItem('userData')).id);
 
   const handleScroll = () => {
     const { pageYOffset } = window;
@@ -62,7 +65,7 @@ const AssignTwo = () => {
 
           <input type="search" placeholder="검색" />
           {/* <IonIcon icon={searchOutline}></IonIcon> */}
-
+          <AuthStatus />
           <NavBox>
             <IonIcon icon={home}></IonIcon>
             <IonIcon icon={paperPlaneOutline}></IonIcon>
@@ -77,6 +80,7 @@ const AssignTwo = () => {
           <IonIcon icon={logoInstagram}></IonIcon>
 
           <img src={InstaLogo} alt="" className="logo" />
+          <AuthStatus />
           <IonIcon icon={paperPlaneOutline}></IonIcon>
         </MobileBar>
       </Header>

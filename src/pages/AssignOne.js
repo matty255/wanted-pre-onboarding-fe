@@ -1,23 +1,100 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import InstaLogo from '../static/insta.png';
 import InstaApple from '../static/instaapple.png';
 import InstaGoogle from '../static/instagoogle.png';
+import { useNavigate, useLocation, Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthContext';
+
+import {
+  validateBlank,
+  validateEmail,
+  validatePassword,
+} from '../hooks/useValidate';
 
 const AssignOne = () => {
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useAuth();
+  let from = location.state?.from?.pathname || '/main';
+  const id = useRef(null);
+  const pwd = useRef(null);
+
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsgEmail, setErrorMsgEmail] = useState('');
+  const [errorMsgPassword, setErrorMsgPassword] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const isBlank = validateBlank(state, setErrorMsg, id, pwd);
+    const isEmail = validateEmail(state, setErrorMsgEmail, id);
+    const isPassword = validatePassword(state, setErrorMsgPassword, pwd);
+    // console.log(isBlank);
+    // console.log(isEmail);
+    // console.log(isPassword);
+
+    if (!isBlank && !isEmail && !isPassword) {
+      setSuccessMsg("You're good to go!");
+      localStorage.setItem(
+        'userData',
+        JSON.stringify({
+          id: id.current.value,
+          pwd: pwd.current.value,
+        })
+      );
+
+      auth.signin(id.current.value, () => {
+        navigate(from, { replace: true });
+      });
+    } else {
+      setSuccessMsg('');
+    }
+  };
+
   return (
     <>
+      {successMsg && <p className="successMsg">{successMsg}</p>}
+      {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+      {errorMsgEmail && <p className="errorMsg">{errorMsgEmail}</p>}
+      {errorMsgPassword && <p className="errorMsg">{errorMsgPassword}</p>}
       <WrapBox>
         <Container>
           <FormBox>
-            <form>
+            <form onSubmit={handleSubmit}>
               <img src={InstaLogo} alt="Instagram" />
 
               <input
                 type="text"
                 placeholder="전화번호, 사용자 이름 또는 이메일"
+                name="username"
+                ref={id}
+                value={state.username}
+                onChange={handleInputChange}
               />
-              <input type="password" placeholder="비밀번호" />
+              <input
+                type="password"
+                placeholder="비밀번호"
+                password="password"
+                name="password"
+                ref={pwd}
+                value={state.password}
+                onChange={handleInputChange}
+                autoComplete="off"
+              />
               <button type="submit">로그인</button>
               <Separator>또는</Separator>
               <FaceBookLogin href="#">
