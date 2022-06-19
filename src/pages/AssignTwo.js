@@ -15,6 +15,7 @@ import {
 } from 'ionicons/icons';
 import InstaLogo from '../static/insta.png';
 
+import PostList from '../components/PostList';
 import PostCard from '../components/PostCard';
 import MainSideContentsCard from '../components/MainSideContentsCard';
 import { AuthStatus, useAuth } from '../hooks/AuthContext';
@@ -32,10 +33,11 @@ const throttle = function (callback, waitTime) {
 
 const AssignTwo = () => {
   let auth = useAuth();
+
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
+
   const documentRef = useRef(document);
-  // console.log(JSON.parse(localStorage.getItem('userData')).id);
 
   const handleScroll = () => {
     const { pageYOffset } = window;
@@ -52,6 +54,7 @@ const AssignTwo = () => {
     return () =>
       documentRef.current.removeEventListener('scroll', throttleScroll);
   }, [pageY]);
+
   return (
     <>
       <Header>
@@ -86,20 +89,7 @@ const AssignTwo = () => {
       </Header>
       <FlexContainer>
         <MainContainer>
-          <ContentBox>
-            <PostCard img={'http://imgur.com/eQPPis3.gif'} />
-            <PostCard
-              img={
-                'https://i.pinimg.com/originals/b6/5e/15/b65e155acbf5ebf5a2413b9081b558e3.gif'
-              }
-            />
-            <PostCard
-              img={
-                'https://www.ddengle.com/files/attach/images/2920390/064/286/011/d9c64016d3800de2f94cca23f4e1dc0a.gif'
-              }
-            />
-          </ContentBox>
-
+          <PostList />
           <UserSideBar>
             <MainSideContentsCard />
           </UserSideBar>

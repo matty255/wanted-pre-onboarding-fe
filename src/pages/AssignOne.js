@@ -72,6 +72,8 @@ const AssignOne = () => {
       localStorage.setItem(
         'userData',
         JSON.stringify({
+          id: id.current.value,
+          pwd: pwd.current.value,
           auth: true,
         })
       );

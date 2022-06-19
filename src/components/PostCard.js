@@ -9,26 +9,21 @@ import {
 } from 'ionicons/icons';
 import styled from 'styled-components';
 
-const PostCard = (img) => {
-  const imgUrl = img;
-
+const PostCard = ({ data }) => {
+  const { feed_index, image, nickname, profile_pic, like_count, comment } =
+    data;
   return (
     <>
       <PostBox>
         <PostBoxTop>
           <UserProfile>
-            <img
-              src={
-                'http://jjal.today/data/file/gallery/1028612757_QvAZRE4a_104175cbd774f08c4a045505fa4cac3fa0c2bec4.gif'
-              }
-              alt=""
-            />
-            <p className="name">피카피카</p>
+            <img src={profile_pic} alt="" />
+            <p className="name">{nickname}</p>
           </UserProfile>
           <IonIcon icon={ellipsisHorizontal} className="show-more"></IonIcon>
         </PostBoxTop>
 
-        <img src={imgUrl.img} alt="" />
+        <img src={image} alt="" className="main-pic" />
 
         <PostBoxBottom>
           <div className="left">
@@ -38,6 +33,7 @@ const PostCard = (img) => {
               <IonIcon icon={paperPlaneOutline}></IonIcon>
             </ActionsBox>
             <UserInfoBox>
+              <p>좋아요 {like_count}개</p>
               <img
                 src={'https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031'}
                 alt=""
@@ -63,9 +59,10 @@ const PostBox = styled.article`
   width: 100%;
   border-radius: 3px;
 
-  & > img {
-    width: 100%;
+  .main-pic {
+    width: 100vh;
     height: auto;
+    object-fit: cover;
   }
 `;
 
@@ -135,6 +132,7 @@ const ActionsBox = styled.div`
 
 const UserInfoBox = styled.div`
   display: flex;
+
   align-items: center;
 
   & > img {
