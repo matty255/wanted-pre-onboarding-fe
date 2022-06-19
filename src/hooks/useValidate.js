@@ -78,7 +78,7 @@ export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
 
   if (
     pwdCheck(state.password) &&
-    JSON.parse(localStorage.getItem('userData')).password === state.password
+    JSON.parse(localStorage.getItem('userData')).pwd === state.password
   ) {
     setErrorMsgPassWord('');
     return false;
