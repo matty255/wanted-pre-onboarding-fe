@@ -32,8 +32,8 @@
   - gnb = 네비게이션 구현 시 스크롤에 관계 없이 화면 상단에 고정되는 `sticky`로 구현해주세요. ✅
   - 모바일 사이즈의 경우 gnb 가운데 있는 Input 창이 사라지면서 space-between 정렬 되게 ✅
   - gnb의 가장 오른쪽 아이콘은 Logout으로 변경해주세요. ✅
-    - (gnb 가운데 `input`은 기능 X)
-    - (아이콘은 자유롭게 사용하셔도 괜찮습니다. 아이콘 라이브러리 설치 O)
+    - (gnb 가운데 `input`은 기능 X) ✅
+    - (아이콘은 자유롭게 사용하셔도 괜찮습니다. 아이콘 라이브러리 설치 O) ✅
 
 ## Assignment3 - `Validation` 
 
@@ -62,17 +62,13 @@
 
 ## Assignment5 - `Feeds`
 
-- 반응형으로 피드 컴포넌트를 개발합니다. (=assignment2와 연동)
-  - Feed는 화면 중앙에 위치 해야하며 모바일 대응이 가능해야 합니다.
-  - 각 Feed의 정보는 public/data 디렉토리에 json형식으로 구성하여 fetch, axios 등으로 받아오기
+- 반응형으로 피드 컴포넌트를 개발합니다. (=assignment2와 연동) ✅
+  - Feed는 화면 중앙에 위치 해야하며 모바일 대응이 가능해야 합니다. ✅
+  - 각 Feed의 정보는 public/data 디렉토리에 json형식으로 구성하여 fetch, axios 등으로 받아오기 ✅
  
-- Feed 더미 데이터는 최소 3개 이상
-  - 이미지는 자유롭게 사용하시되 이미지들의 사이즈가 각각 달라야 합니다. (ex. 정사각형, 세로가 긴 것, 가로가 긴 것 등)
-  - 필요하시면 아래의 url을 사용하세요.
-   - "[https://source.unsplash.com/random/600x500](https://source.unsplash.com/random/600x500)"
-   - "[https://source.unsplash.com/random/900x500](https://source.unsplash.com/random/900x500)"
-   - "[https://source.unsplash.com/random/700x1080](https://source.unsplash.com/random/700x1080)"
-  - Feeds의 Image가 로딩된 후 컴포넌트가 로딩 되도록 Lazy Loading을 구현해 주세요.
+- Feed 더미 데이터는 최소 3개 이상 ✅
+  - 이미지는 자유롭게 사용하시되 이미지들의 사이즈가 각각 달라야 합니다. (ex. 정사각형, 세로가 긴 것, 가로가 긴 것 등) ✅
+  - Feeds의 Image가 로딩된 후 컴포넌트가 로딩 되도록 해주세요!
 
 - 댓글기능 만들기
   - 각각의 Feed에 댓글을 추가할 수 있도록 개발해주세요. (Enter나 클릭으로 게시 가능하도록)
