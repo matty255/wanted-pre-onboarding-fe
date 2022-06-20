@@ -11,11 +11,13 @@ import {
 import styled from 'styled-components';
 import { PokemonContext } from '../hooks/PokemonContext';
 import { useAuth } from '../hooks/AuthContext';
+import Image from './Image';
 
 const PostCard = ({ data }) => {
   const [state, setState] = useState({
     comment: '',
   });
+  const [loading, setLoading] = useState(true);
   const Auth = useAuth();
   const { addComment, commentList } = useContext(PokemonContext);
   const comments = useRef(null);
@@ -62,7 +64,7 @@ const PostCard = ({ data }) => {
 
   return (
     <>
-      <PostBox>
+      <PostBox style={loading ? { display: 'none' } : {}}>
         <PostBoxTop>
           <UserProfile>
             <img src={profile_pic} alt="" />
@@ -71,7 +73,7 @@ const PostCard = ({ data }) => {
           <IonIcon icon={ellipsisHorizontal} className="show-more"></IonIcon>
         </PostBoxTop>
 
-        <img src={image} alt="" className="main-pic" />
+        <Image url={image} loading={loading} setLoading={setLoading} />
 
         <PostBoxBottom>
           <PostBoxBottomTop>
@@ -104,6 +106,7 @@ const PostCard = ({ data }) => {
               <form>
                 <input
                   name="comment"
+                  placeholder="댓글달기..."
                   ref={comments}
                   value={state.comment}
                   onChange={handleInputChange}
@@ -127,6 +130,35 @@ const PostBox = styled.article`
   border: 1px solid #dbdbdb;
   width: 100%;
   border-radius: 3px;
+
+  -webkit-animation: fade-in-top 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) 0.3s
+    both;
+  animation: fade-in-top 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) 0.3s both;
+
+  @-webkit-keyframes fade-in-top {
+    0% {
+      -webkit-transform: translateY(-50px);
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in-top {
+    0% {
+      -webkit-transform: translateY(-50px);
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
   .main-pic {
     width: 100vh;
@@ -233,4 +265,34 @@ const InnerBox = styled.div`
   }
 `;
 
-const CommentSummitBox = styled.div``;
+const CommentSummitBox = styled.div`
+  border-top: 1px solid #dbdbdb;
+  width: 100%;
+  height: 3.7rem;
+  & > ion-icon {
+    position: absolute;
+    margin: 1.1rem 1rem;
+    font-size: 1.5rem;
+  }
+
+  & > form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > form > input {
+    margin-left: 3.2rem;
+    flex-grow: 1;
+    padding-top: 1.32rem;
+    font-size: 0.9rem;
+  }
+  & > form > button {
+    width: 4rem;
+    flex-shrink: 0;
+    height: 2rem;
+    padding-top: 1.2rem;
+    font-size: 0.9rem;
+    color: #139ef2;
+    cursor: pointer;
+  }
+`;
