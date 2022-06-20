@@ -6,6 +6,8 @@
 ## 과제 참고 이미지
 [참고 이미지 링크](https://bclef25.notion.site/1ed6d5b2192b45eeb4104a67f6a77250)
 
+과제 완료!
+남은 할일 : 더미데이터 보완, 로직 개선
 
 ## 진행 가이드
 
@@ -43,14 +45,14 @@
   - 로그인 시 이메일과 비밀번호가 등록되어 있는 것과 일치 여부 확인 ✅
   - 정규표현식을 사용하고 Validation은 따로 분리해둘 것 ✅
 
-- Validation 상태를 CSS로 표현해주세요.
-  - Email Input
-    Validation Check를 통해 Email 형식이 아닌 경우 border가 red색상으로 변경되게
-  - Password Input
-    Validation Check를 통해 Password 형식이 아닌 경우 border가 red색상으로 변경되게
+- Validation 상태를 CSS로 표현해주세요. ✅
+  - Email Input ✅
+    Validation Check를 통해 Email 형식이 아닌 경우 border가 red색상으로 변경되게 ✅
+  - Password Input ✅
+    Validation Check를 통해 Password 형식이 아닌 경우 border가 red색상으로 변경되게 ✅
     
-  - Login Button
-    Validation Check가 실패했을때는 button에 disabled 적용하기
+  - Login Button ✅
+    Validation Check가 실패했을때는 button에 disabled 적용하기 ✅
 
 
 ## Assignment4 - `Routing`
@@ -68,11 +70,11 @@
  
 - Feed 더미 데이터는 최소 3개 이상 ✅
   - 이미지는 자유롭게 사용하시되 이미지들의 사이즈가 각각 달라야 합니다. (ex. 정사각형, 세로가 긴 것, 가로가 긴 것 등) ✅
-  - Feeds의 Image가 로딩된 후 컴포넌트가 로딩 되도록 해주세요!
+  - Feeds의 Image가 로딩된 후 컴포넌트가 로딩 되도록 해주세요! ✅
 
 - 댓글기능 만들기
-  - 각각의 Feed에 댓글을 추가할 수 있도록 개발해주세요. (Enter나 클릭으로 게시 가능하도록)
-  - 게시 후 Input은 초기화 되어야 합니다.
+  - 각각의 Feed에 댓글을 추가할 수 있도록 개발해주세요. (Enter나 클릭으로 게시 가능하도록) ✅
+  - 게시 후 Input은 초기화 되어야 합니다. ✅
 
 
 
