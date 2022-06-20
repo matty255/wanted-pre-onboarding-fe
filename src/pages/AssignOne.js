@@ -29,14 +29,7 @@ const AssignOne = () => {
         })
       );
   }, []);
-  // const isUserEmail =
-  //   JSON.parse(localStorage.getItem('userData')).id === id.current?.value
-  //     ? false
-  //     : true;
-  // const isUserPassword =
-  //   JSON.parse(localStorage.getItem('userData')).pwd === pwd.current?.value
-  //     ? false
-  //     : true;
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setState((prevState) => ({

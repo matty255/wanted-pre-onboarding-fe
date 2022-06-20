@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { IonIcon } from '@ionic/react';
 import {
   bookmarkOutline,
@@ -6,13 +6,60 @@ import {
   ellipsisHorizontal,
   heartOutline,
   paperPlaneOutline,
+  happyOutline,
 } from 'ionicons/icons';
 import styled from 'styled-components';
+import { PokemonContext } from '../hooks/PokemonContext';
+import { useAuth } from '../hooks/AuthContext';
 
 const PostCard = ({ data }) => {
+  const [state, setState] = useState({
+    comment: '',
+  });
+  const Auth = useAuth();
+  const { addComment, commentList } = useContext(PokemonContext);
+  const comments = useRef(null);
   const randomNumber = Math.floor(Math.random() * (1 - 10 + 1)) + 1;
   const { feed_index, image, nickname, profile_pic, like_count, comment } =
     data;
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const com = {
+    image: image,
+    nickname: nickname,
+    profile_pic: profile_pic,
+    like_count: like_count,
+    comment: [
+      {
+        username: Auth.user,
+        profile_pic:
+          'https://opgg-com-image.akamaized.net/attach/images/20190803023339.668722.gif',
+        comment_content: JSON.stringify(comments.current?.value)?.replace(
+          /"/g,
+          ''
+        ),
+      },
+      ...comment,
+    ],
+
+    feed_index: feed_index,
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addComment({ com });
+    setState({
+      comment: '',
+    });
+  };
+
   return (
     <>
       <PostBox>
@@ -51,6 +98,21 @@ const PostCard = ({ data }) => {
                   <p>{comment.comment_content}</p>
                 </InnerBox>
               ))}
+            <hr />
+            <CommentSummitBox>
+              <IonIcon icon={happyOutline}></IonIcon>
+              <form>
+                <input
+                  name="comment"
+                  ref={comments}
+                  value={state.comment}
+                  onChange={handleInputChange}
+                />
+                <button type="submit" onClick={handleSubmit}>
+                  게시
+                </button>
+              </form>
+            </CommentSummitBox>
           </CommentBox>
         </PostBoxBottom>
       </PostBox>
@@ -170,3 +232,5 @@ const InnerBox = styled.div`
     margin-right: 0.5rem;
   }
 `;
+
+const CommentSummitBox = styled.div``;

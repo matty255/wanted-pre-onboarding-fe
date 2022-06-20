@@ -69,7 +69,7 @@ const AssignTwo = () => {
 
           <input type="search" placeholder="검색" />
           {/* <IonIcon icon={searchOutline}></IonIcon> */}
-          <AuthStatus />
+          {/* <AuthStatus /> */}
           <NavBox>
             <IonIcon icon={home}></IonIcon>
             <IonIcon icon={paperPlaneOutline}></IonIcon>
@@ -89,7 +89,7 @@ const AssignTwo = () => {
           <IonIcon icon={logoInstagram}></IonIcon>
 
           <img src={InstaLogo} alt="" className="logo" />
-          <AuthStatus />
+
           <IonIcon
             icon={logOutOutline}
             onClick={() => {

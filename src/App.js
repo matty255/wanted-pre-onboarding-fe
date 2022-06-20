@@ -11,36 +11,39 @@ import {
   Outlet,
 } from 'react-router-dom';
 import { AuthProvider, RequireAuth, IsLogin } from './hooks/AuthContext';
+import { PokeProvider } from './hooks/PokemonContext';
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <Routes>
-          <Route
-            path="/main"
-            element={
-              <RequireAuth>
-                <AssignTwo />
-              </RequireAuth>
-            }
-          />
-          {['/', '/login'].map((path, index) => {
-            return (
-              <Route
-                path={path}
-                element={
-                  <>
-                    <IsLogin>
-                      <AssignOne />
-                    </IsLogin>
-                  </>
-                }
-                key={index}
-              />
-            );
-          })}
-        </Routes>
+        <PokeProvider>
+          <Routes>
+            <Route
+              path="/main"
+              element={
+                <RequireAuth>
+                  <AssignTwo />
+                </RequireAuth>
+              }
+            />
+            {['/', '/login'].map((path, index) => {
+              return (
+                <Route
+                  path={path}
+                  element={
+                    <>
+                      <IsLogin>
+                        <AssignOne />
+                      </IsLogin>
+                    </>
+                  }
+                  key={index}
+                />
+              );
+            })}
+          </Routes>
+        </PokeProvider>
       </AuthProvider>
     </>
   );
