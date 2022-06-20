@@ -44,23 +44,19 @@ export const validateEmail = (
 
     return _reg.test(email);
   };
+  setTimeout(() => {
+    if (emailCheck(state.username)) {
+      setErrorMsgEmail('');
 
-  if (
-    emailCheck(state.username) &&
-    JSON.parse(localStorage.getItem('userData')).id === state.username
-  ) {
-    setErrorMsgEmail('');
+      return false;
+    } else {
+      if (id.current?.value !== '') {
+        setErrorMsgEmail(fields.message);
+      }
 
-    return false;
-  } else if (emailCheck(state.username)) {
-    setErrorMsgEmail('존재하지 않는 회원입니다.');
-    id.current.focus();
-    return true;
-  } else {
-    setErrorMsgEmail(fields.message);
-    id.current.focus();
-    return true;
-  }
+      return true;
+    }
+  }, 500);
 };
 
 export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
@@ -75,20 +71,16 @@ export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
 
     return _reg.test(pwd);
   };
+  setTimeout(() => {
+    if (pwdCheck(state.password)) {
+      setErrorMsgPassWord('');
+      return false;
+    } else {
+      if (pwd.current?.value !== '') {
+        setErrorMsgPassWord(fields.message);
+      }
 
-  if (
-    pwdCheck(state.password) &&
-    JSON.parse(localStorage.getItem('userData')).pwd === state.password
-  ) {
-    setErrorMsgPassWord('');
-    return false;
-  } else if (pwdCheck(state.password)) {
-    setErrorMsgPassWord('비밀번호가 틀렸습니다. 다시 확인해주세요');
-    pwd.current?.focus();
-    return true;
-  } else {
-    setErrorMsgPassWord(fields.message);
-    pwd.current?.focus();
-    return true;
-  }
+      return true;
+    }
+  }, 500);
 };

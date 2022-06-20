@@ -49,19 +49,25 @@ const AssignOne = () => {
   const [errorMsgEmail, setErrorMsgEmail] = useState('');
   const [errorMsgPassword, setErrorMsgPassword] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const isEmail = validateEmail(state, setErrorMsgEmail, id);
+  const isPassword = validatePassword(state, setErrorMsgPassword, pwd);
 
+  console.log(errorMsgEmail === '', errorMsgPassword === '');
   const handleSubmit = (event) => {
     event.preventDefault();
     const isBlank = validateBlank(state, setErrorMsg, id, pwd);
-    const isEmail = validateEmail(state, setErrorMsgEmail, id);
-    const isPassword = validatePassword(state, setErrorMsgPassword, pwd);
 
     // console.log(isBlank);
     // console.log(isEmail);
     // console.log(isPassword);
 
-    if (!isBlank && !isEmail && !isPassword) {
-      setSuccessMsg("You're good to go!");
+    if (
+      !isBlank &&
+      !isEmail &&
+      !isPassword &&
+      JSON.parse(localStorage.getItem('userData')).id === id.current.value &&
+      JSON.parse(localStorage.getItem('userData')).pwd === pwd.current.value
+    ) {
       localStorage.setItem(
         'userData',
         JSON.stringify({
@@ -75,27 +81,21 @@ const AssignOne = () => {
         navigate(from, { replace: true });
       });
     } else {
-      setSuccessMsg('');
+      setSuccessMsg('회원정보가 틀렸습니다');
+      setTimeout(() => setSuccessMsg(''), 500);
     }
   };
 
   return (
     <>
       {successMsg && <p className="successMsg">{successMsg}</p>}
-      {errorMsg && errorMsgEmail === '' && (
-        <p className="errorMsg">{errorMsg}</p>
-      )}
-      {errorMsgEmail && <p className="errorMsg">{errorMsgEmail}</p>}
-      {errorMsgPassword && errorMsgEmail === '' && (
-        <p className="errorMsg">{errorMsgPassword}</p>
-      )}
 
       <WrapBox>
         <Container>
           <FormBox>
             <form onSubmit={handleSubmit}>
               <img src={InstaLogo} alt="Instagram" />
-
+              {errorMsgEmail && <p className="errorMsg">{errorMsgEmail}</p>}
               <input
                 type="text"
                 placeholder="전화번호, 사용자 이름 또는 이메일"
@@ -103,7 +103,11 @@ const AssignOne = () => {
                 ref={id}
                 value={state.username}
                 onChange={handleInputChange}
+                style={errorMsgEmail === '' ? {} : { border: '1px solid red' }}
               />
+              {errorMsgPassword && (
+                <p className="errorMsg">{errorMsgPassword}</p>
+              )}
               <input
                 type="password"
                 placeholder="비밀번호"
@@ -113,8 +117,19 @@ const AssignOne = () => {
                 value={state.password}
                 onChange={handleInputChange}
                 autoComplete="off"
+                style={
+                  errorMsgPassword === '' ? {} : { border: '1px solid red' }
+                }
               />
-              <button type="submit">로그인</button>
+
+              <button
+                type="submit"
+                disabled={
+                  errorMsgEmail === '' && errorMsgPassword === '' ? false : true
+                }
+              >
+                로그인
+              </button>
               <Separator>또는</Separator>
               <FaceBookLogin href="#">
                 <i className="fab fa-facebook" /> Facebook으로 로그인
@@ -196,12 +211,23 @@ const FormBox = styled.div`
     border: none;
     border-radius: 0.3rem;
     cursor: pointer;
+    :disabled {
+      background-color: gray;
+      cursor: default;
+    }
   }
   & > form > img {
     margin: 1rem auto 2.7rem;
     width: 10.938rem;
     height: 3.188rem;
     background-color: #fff;
+  }
+  & > form > p {
+    font-size: 0.5rem;
+    color: red;
+    margin-bottom: -0.8rem;
+    z-index: 50;
+    text-align: right;
   }
 `;
 
