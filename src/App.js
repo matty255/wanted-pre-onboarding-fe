@@ -1,15 +1,7 @@
 import React from 'react';
 import AssignOne from './pages/AssignOne';
 import AssignTwo from './pages/AssignTwo';
-import {
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-  useLocation,
-  Navigate,
-  Outlet,
-} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AuthProvider, RequireAuth, IsLogin } from './hooks/AuthContext';
 import { FeedProvider } from './hooks/FeedContext';
 
@@ -27,7 +19,7 @@ function App() {
                 </RequireAuth>
               }
             />
-            {['/', '/login'].map((path, index) => {
+            {['/', '/login', '*'].map((path, index) => {
               return (
                 <Route
                   path={path}
