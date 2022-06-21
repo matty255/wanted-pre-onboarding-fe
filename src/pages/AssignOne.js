@@ -3,21 +3,29 @@ import styled from 'styled-components';
 import InstaLogo from '../static/insta.png';
 import InstaApple from '../static/instaapple.png';
 import InstaGoogle from '../static/instagoogle.png';
-import { useNavigate, useLocation, Navigate, Outlet } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
+import { useDebounce } from '../hooks/useDebounce';
 
 import {
   validateBlank,
   validateEmail,
   validatePassword,
+  userSearch,
 } from '../hooks/useValidate';
 
 const AssignOne = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || '/main';
   const [state, setState] = useState({
     username: '',
     password: '',
   });
+  const [isUser, setIsUser] = useState(false);
+  const debouncedKeyword = useDebounce(state, 250);
 
+  // test userInfo
   useEffect(() => {
     if (localStorage.getItem('userData') === null)
       return localStorage.setItem(
@@ -38,10 +46,7 @@ const AssignOne = () => {
     }));
   };
 
-  let navigate = useNavigate();
-  let location = useLocation();
   let auth = useAuth();
-  let from = location.state?.from?.pathname || '/main';
   const id = useRef(null);
   const pwd = useRef(null);
 
@@ -49,25 +54,30 @@ const AssignOne = () => {
   const [errorMsgEmail, setErrorMsgEmail] = useState('');
   const [errorMsgPassword, setErrorMsgPassword] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
-  const isEmail = validateEmail(state, setErrorMsgEmail, id);
-  const isPassword = validatePassword(state, setErrorMsgPassword, pwd);
 
-  console.log(errorMsgEmail === '', errorMsgPassword === '');
+  // validators
+  const isEmail = validateEmail(debouncedKeyword, setErrorMsgEmail, id);
+  const isPassword = validatePassword(
+    debouncedKeyword,
+    setErrorMsgPassword,
+    pwd
+  );
+  const validateUser = userSearch(debouncedKeyword).then((result) =>
+    setIsUser(result)
+  );
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const isBlank = validateBlank(state, setErrorMsg, id, pwd);
 
-    // console.log(isBlank);
-    // console.log(isEmail);
-    // console.log(isPassword);
+    const isBlank = validateBlank(debouncedKeyword, setErrorMsg, id, pwd);
+    // console.log(
+    //   !isBlank,
+    //   errorMsgEmail === '',
+    //   errorMsgPassword === '',
+    //   isUser
+    // );
 
-    if (
-      !isBlank &&
-      !isEmail &&
-      !isPassword &&
-      JSON.parse(localStorage.getItem('userData')).id === id.current.value &&
-      JSON.parse(localStorage.getItem('userData')).pwd === pwd.current.value
-    ) {
+    if (!isBlank && errorMsgEmail === '' && errorMsgPassword === '' && isUser) {
       localStorage.setItem(
         'userData',
         JSON.stringify({
@@ -95,6 +105,7 @@ const AssignOne = () => {
           <FormBox>
             <form onSubmit={handleSubmit}>
               <img src={InstaLogo} alt="Instagram" />
+              {errorMsg && <p className="errorMsg">{errorMsg}</p>}
               {errorMsgEmail && <p className="errorMsg">{errorMsgEmail}</p>}
               <input
                 type="text"

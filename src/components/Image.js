@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 
 function Image(props) {
   const { url, loading, setLoading } = props;
   const onLoad = () => {
-    console.log('loaded');
+    // console.log('loaded');
     setLoading(false);
   };
 

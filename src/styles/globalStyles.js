@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
    max-width: 100%;
    ion-icon {
     font-size: 2rem;
+    cursor: pointer;
   }
   
   body {

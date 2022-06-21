@@ -2,17 +2,15 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
 import axios from 'axios';
-import { PokemonContext } from '../hooks/PokemonContext';
+import { FeedContext } from '../hooks/FeedContext';
 
 const PostList = () => {
-  const { feedList, getFeedList } = useContext(PokemonContext);
+  const { feedList, getFeedList } = useContext(FeedContext);
 
-  // console.log(feedList);
   const callFeed = async () => {
     try {
       const response = await axios.get('./data/feed.json');
       const data = response.data;
-
       getFeedList(data);
     } catch (error) {
       console.log(error);

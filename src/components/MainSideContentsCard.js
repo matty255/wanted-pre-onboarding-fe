@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAuth } from '../hooks/AuthContext';
+
 const MainSideContentsCard = () => {
   let auth = useAuth();
   return (
@@ -35,8 +36,8 @@ const MainSideContentsCard = () => {
                 alt=""
               />
               <div className="description">
-                <p className="name">계정명</p>
-                <p className="status">ㅇㅇㅇㅇㅇㅇㅇ</p>
+                <p className="name">아는 사람일수도</p>
+                <p className="status">cat_luv</p>
               </div>
             </div>
             <strong>팔로우</strong>
@@ -51,8 +52,8 @@ const MainSideContentsCard = () => {
                 alt=""
               />
               <div className="description">
-                <p className="name">계정명</p>
-                <p className="status">ㅇㅇ</p>
+                <p className="name">포공방 레이드 구합니다</p>
+                <p className="status">dog_luv</p>
               </div>
             </div>
             <strong>팔로우</strong>
@@ -66,8 +67,8 @@ const MainSideContentsCard = () => {
                 alt=""
               />
               <div className="description">
-                <p className="name">계정</p>
-                <p className="status">ㅇㅇㅇㅇㅇㅇㅇ</p>
+                <p className="name">.</p>
+                <p className="status">pokemon</p>
               </div>
             </div>
             <strong>팔로우</strong>
@@ -146,9 +147,11 @@ const OtherSuggestionsBox = styled.div`
     margin-bottom: 17px;
     display: flex;
     justify-content: space-between;
+    width: 20rem;
   }
   .suggestion .user {
     display: flex;
+    padding: 0.2rem;
   }
 
   .suggestion .user img {

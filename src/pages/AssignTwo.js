@@ -10,8 +10,6 @@ import {
   personOutline,
   searchCircleOutline,
   home,
-  search,
-  searchOutline,
   logOutOutline,
 } from 'ionicons/icons';
 import InstaLogo from '../static/insta.png';
@@ -19,7 +17,7 @@ import InstaLogo from '../static/insta.png';
 import PostList from '../components/PostList';
 import { useNavigate } from 'react-router-dom';
 import MainSideContentsCard from '../components/MainSideContentsCard';
-import { AuthStatus, useAuth } from '../hooks/AuthContext';
+import { useAuth } from '../hooks/AuthContext';
 
 const throttle = function (callback, waitTime) {
   let timerId = null;
@@ -35,6 +33,8 @@ const throttle = function (callback, waitTime) {
 const AssignTwo = () => {
   let auth = useAuth();
   let navigate = useNavigate();
+
+  // scrolls
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
 
@@ -48,7 +48,7 @@ const AssignTwo = () => {
     setPageY(pageYOffset);
   };
 
-  const throttleScroll = throttle(handleScroll, 50);
+  const throttleScroll = throttle(handleScroll, 400);
 
   useEffect(() => {
     documentRef.current.addEventListener('scroll', throttleScroll);
@@ -68,8 +68,6 @@ const AssignTwo = () => {
           </LogoBox>
 
           <input type="search" placeholder="검색" />
-          {/* <IonIcon icon={searchOutline}></IonIcon> */}
-          {/* <AuthStatus /> */}
           <NavBox>
             <IonIcon icon={home}></IonIcon>
             <IonIcon icon={paperPlaneOutline}></IonIcon>
@@ -232,13 +230,6 @@ const MainContainer = styled.div`
   }
 `;
 
-const ContentBox = styled.div`
-  max-width: 614px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const UserSideBar = styled.aside`
   /* Only for Safari compatibility */
   position: -webkit-sticky;
@@ -250,6 +241,11 @@ const UserSideBar = styled.aside`
   @media (max-width: 614px) {
     display: none;
   }
+  @media (max-width: 767px) {
+    top: 54px;
+    overflow-y: scroll;
+  }
+
   background-color: white;
 `;
 

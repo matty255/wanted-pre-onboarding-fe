@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 export const validateBlank = (state, setErrorMsg, id, pwd) => {
   const fields = [
@@ -45,7 +46,7 @@ export const validateEmail = (
     return _reg.test(email);
   };
   setTimeout(() => {
-    if (emailCheck(state.username)) {
+    if (emailCheck(state.username) || state.username === '') {
       setErrorMsgEmail('');
 
       return false;
@@ -72,7 +73,7 @@ export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
     return _reg.test(pwd);
   };
   setTimeout(() => {
-    if (pwdCheck(state.password)) {
+    if (pwdCheck(state.password) || state.password === '') {
       setErrorMsgPassWord('');
       return false;
     } else {
@@ -83,4 +84,18 @@ export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
       return true;
     }
   }, 500);
+};
+
+export const userSearch = async (state) => {
+  try {
+    const response = await axios.get('./data/user.json');
+    const data = response.data;
+    const _isUser = data.filter((user) => user.id === state.username);
+
+    if (_isUser && _isUser[0]?.pwd === state.password) {
+      return true;
+    } else return false;
+  } catch (error) {
+    console.log(error);
+  }
 };

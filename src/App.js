@@ -11,13 +11,13 @@ import {
   Outlet,
 } from 'react-router-dom';
 import { AuthProvider, RequireAuth, IsLogin } from './hooks/AuthContext';
-import { PokeProvider } from './hooks/PokemonContext';
+import { FeedProvider } from './hooks/FeedContext';
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <PokeProvider>
+        <FeedProvider>
           <Routes>
             <Route
               path="/main"
@@ -43,7 +43,7 @@ function App() {
               );
             })}
           </Routes>
-        </PokeProvider>
+        </FeedProvider>
       </AuthProvider>
     </>
   );

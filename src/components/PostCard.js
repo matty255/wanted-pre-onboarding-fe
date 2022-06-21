@@ -9,21 +9,22 @@ import {
   happyOutline,
 } from 'ionicons/icons';
 import styled from 'styled-components';
-import { PokemonContext } from '../hooks/PokemonContext';
+import { FeedContext } from '../hooks/FeedContext';
 import { useAuth } from '../hooks/AuthContext';
 import Image from './Image';
 
 const PostCard = ({ data }) => {
+  const Auth = useAuth();
+  const { feed_index, image, nickname, profile_pic, like_count, comment } =
+    data;
+
+  const { addComment } = useContext(FeedContext);
+  const randomNumber = Math.floor(Math.random() * (1 - 10 + 1)) + 1;
+
   const [state, setState] = useState({
     comment: '',
   });
   const [loading, setLoading] = useState(true);
-  const Auth = useAuth();
-  const { addComment, commentList } = useContext(PokemonContext);
-  const comments = useRef(null);
-  const randomNumber = Math.floor(Math.random() * (1 - 10 + 1)) + 1;
-  const { feed_index, image, nickname, profile_pic, like_count, comment } =
-    data;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -43,10 +44,7 @@ const PostCard = ({ data }) => {
         username: Auth.user,
         profile_pic:
           'https://opgg-com-image.akamaized.net/attach/images/20190803023339.668722.gif',
-        comment_content: JSON.stringify(comments.current?.value)?.replace(
-          /"/g,
-          ''
-        ),
+        comment_content: state.comment,
       },
       ...comment,
     ],
@@ -56,10 +54,14 @@ const PostCard = ({ data }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addComment({ com });
-    setState({
-      comment: '',
-    });
+    if (state.comment === '') {
+      return alert('내용을 입력해주세요!');
+    } else {
+      addComment({ com });
+      setState({
+        comment: '',
+      });
+    }
   };
 
   return (
@@ -107,7 +109,6 @@ const PostCard = ({ data }) => {
                 <input
                   name="comment"
                   placeholder="댓글달기..."
-                  ref={comments}
                   value={state.comment}
                   onChange={handleInputChange}
                 />
@@ -217,7 +218,8 @@ const PostBoxBottomTop = styled.div`
   justify-content: space-between;
   height: 76px;
   .left {
-    margin: auto 18px;
+    margin-top: 14px;
+    margin-left: 18px;
   }
   .right {
     margin-top: 14px;
@@ -232,6 +234,7 @@ const ActionsBox = styled.div`
   & > ion-icon {
     margin-right: 10px;
     font-size: 1.4rem;
+    margin-bottom: 0.2rem;
   }
 `;
 

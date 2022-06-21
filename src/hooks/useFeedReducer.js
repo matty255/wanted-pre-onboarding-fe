@@ -6,7 +6,7 @@ const getFeedList = (poke, state) => ({
   feedList: _.uniq([...poke]),
 });
 
-const pokemonReducer = (state, action) => {
+const feedReducer = (state, action) => {
   switch (action.type) {
     case ADD_COMMENT:
       // console.log('updating', action.feedList);
@@ -25,7 +25,7 @@ const pokemonReducer = (state, action) => {
   }
 };
 
-export const usePokemonReducer = () =>
-  useReducer(pokemonReducer, {
+export const useFeedReducer = () =>
+  useReducer(feedReducer, {
     feedList: [],
   });

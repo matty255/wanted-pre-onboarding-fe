@@ -1,11 +1,11 @@
 import React, { createContext } from 'react';
-import { usePokemonReducer } from './usePokemonReducer';
+import { useFeedReducer } from './useFeedReducer';
 import { ADD_COMMENT, GET_FEEDLIST } from './actions';
 
-const PokemonContext = createContext();
+const FeedContext = createContext();
 
-const PokeProvider = (props) => {
-  const [state, dispatch] = usePokemonReducer();
+const FeedProvider = (props) => {
+  const [state, dispatch] = useFeedReducer();
   const { feedList, comment } = state;
 
   const getFeedList = (feedList) => dispatch({ type: GET_FEEDLIST, feedList });
@@ -19,10 +19,10 @@ const PokeProvider = (props) => {
   };
 
   return (
-    <PokemonContext.Provider value={providerValue}>
+    <FeedContext.Provider value={providerValue}>
       {props.children}
-    </PokemonContext.Provider>
+    </FeedContext.Provider>
   );
 };
 
-export { PokemonContext, PokeProvider };
+export { FeedContext, FeedProvider };
