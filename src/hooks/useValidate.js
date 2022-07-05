@@ -24,6 +24,7 @@ export const validateBlank = (state, setErrorMsg, id, pwd) => {
       message: '비밀번호를 입력해주세요',
     },
   ];
+
   const isNotFilled = fields.some((field) => {
     if (field.value.trim() === '') {
       setErrorMsg(field.message);
@@ -37,44 +38,37 @@ export const validateBlank = (state, setErrorMsg, id, pwd) => {
   return isNotFilled;
 };
 
-export const validateEmail = (state, setErrorMsgEmail, id) => {
+export const validateEmail = (setErrorMsgEmail, id) => {
   const fields = {
-    name: 'username',
-    value: state.username,
     message: '이메일형식이 아닙니다.',
   };
 
   setTimeout(() => {
-    if (isValidRegExp('name', state.username) || state.username === '') {
+    if (isValidRegExp('name', id.current.value) || id.current.value === '') {
       setErrorMsgEmail('');
 
       return false;
     } else {
-      if (id.current?.value !== '') {
-        setErrorMsgEmail(fields.message);
-      }
-
+      setErrorMsgEmail(fields.message);
       return true;
     }
   }, 50);
 };
 
-export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
+export const validatePassword = (setErrorMsgPassWord, pwd) => {
   const fields = {
-    name: 'password',
-    value: state.password,
     message: '비번은 8글자이상 대문자소문자특수문자 포함.',
   };
 
   setTimeout(() => {
-    if (isValidRegExp('password', state.password) || state.password === '') {
+    if (
+      isValidRegExp('password', pwd.current.value) ||
+      pwd.current.value === ''
+    ) {
       setErrorMsgPassWord('');
       return false;
     } else {
-      if (pwd.current?.value !== '') {
-        setErrorMsgPassWord(fields.message);
-      }
-
+      setErrorMsgPassWord(fields.message);
       return true;
     }
   }, 50);

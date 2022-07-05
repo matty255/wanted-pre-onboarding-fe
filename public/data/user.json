@@ -1,9 +1,9 @@
 [
-    {"id": "test01@test.test",
+    {"id": "test01@test.tes",
     "pwd": "!Qwe1234",
     "auth": false},
     
-    {"id": "test02@test.test",
+    {"id": "test02@test.tes",
         "pwd": "!Qwe12345",
         "auth": false}
 ]

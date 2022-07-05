@@ -18,21 +18,13 @@ import PostList from '../components/PostList';
 import { useNavigate } from 'react-router-dom';
 import MainSideContentsCard from '../components/MainSideContentsCard';
 import { useAuth } from '../store/AuthContext';
-
-const throttle = function (callback, waitTime) {
-  let timerId = null;
-  return (e) => {
-    if (timerId) return;
-    timerId = setTimeout(() => {
-      callback.call(this, e);
-      timerId = null;
-    }, waitTime);
-  };
-};
+import { useThrottle } from '../hooks/useThrottle';
 
 const AssignTwo = () => {
   let auth = useAuth();
   let navigate = useNavigate();
+  let throttle = useThrottle();
+  const throttleScroll = useThrottle(handleScroll, 200);
 
   // scrolls
   const [hide, setHide] = useState(false);
@@ -40,15 +32,13 @@ const AssignTwo = () => {
 
   const documentRef = useRef(document);
 
-  const handleScroll = () => {
+  function handleScroll() {
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
     setHide(hide);
     setPageY(pageYOffset);
-  };
-
-  const throttleScroll = throttle(handleScroll, 400);
+  }
 
   useEffect(() => {
     documentRef.current.addEventListener('scroll', throttleScroll);

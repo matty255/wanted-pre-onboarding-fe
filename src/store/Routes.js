@@ -1,10 +1,11 @@
-import { AuthProvider, RequireAuth, IsLogin } from './AuthContext';
+import { RequireAuth, IsLogin, AuthProvider } from './AuthContext';
 import { Routes, Route } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Login from '../pages/Login';
 import Main from '../pages/Main';
-
 export const RoutesExport = () => {
+  // userInfo test
+
   return (
     <>
       <AuthProvider>

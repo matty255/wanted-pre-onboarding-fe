@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { IonIcon } from '@ionic/react';
 import {
   bookmarkOutline,
@@ -6,63 +6,17 @@ import {
   ellipsisHorizontal,
   heartOutline,
   paperPlaneOutline,
-  happyOutline,
 } from 'ionicons/icons';
 import styled from 'styled-components';
-import { FeedContext } from '../store/FeedContext';
-import { useAuth } from '../store/AuthContext';
 import Image from './Image';
+import { CommentSubmit } from './CommentSubmit';
 
 const PostCard = ({ data }) => {
-  const Auth = useAuth();
   const { feed_index, image, nickname, profile_pic, like_count, comment } =
     data;
 
-  const { addComment } = useContext(FeedContext);
   const randomNumber = Math.floor(Math.random() * (1 - 10 + 1)) + 1;
-
-  const [state, setState] = useState({
-    comment: '',
-  });
   const [loading, setLoading] = useState(true);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const com = {
-    image: image,
-    nickname: nickname,
-    profile_pic: profile_pic,
-    like_count: like_count,
-    comment: [
-      {
-        username: Auth.user,
-        profile_pic:
-          'https://opgg-com-image.akamaized.net/attach/images/20190803023339.668722.gif',
-        comment_content: state.comment,
-      },
-      ...comment,
-    ],
-
-    feed_index: feed_index,
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (state.comment.trim() === '') {
-      return alert('내용을 입력해주세요!');
-    } else {
-      addComment({ com });
-      setState({
-        comment: '',
-      });
-    }
-  };
 
   return (
     <>
@@ -103,20 +57,7 @@ const PostCard = ({ data }) => {
                 </InnerBox>
               ))}
             <hr />
-            <CommentSummitBox>
-              <IonIcon icon={happyOutline}></IonIcon>
-              <form>
-                <input
-                  name="comment"
-                  placeholder="댓글달기..."
-                  value={state.comment}
-                  onChange={handleInputChange}
-                />
-                <button type="submit" onClick={handleSubmit}>
-                  게시
-                </button>
-              </form>
-            </CommentSummitBox>
+            <CommentSubmit data={data} />
           </CommentBox>
         </PostBoxBottom>
       </PostBox>
@@ -161,10 +102,18 @@ const PostBox = styled.article`
     }
   }
 
-  .main-pic {
-    width: 100vh;
-    height: auto;
+  .button {
+    width: 100%;
+    height: 3rem;
+    text-align: center;
+    z-index: 10;
+    position: relative;
     object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: 1px solid #dbdbdb;
   }
 `;
 

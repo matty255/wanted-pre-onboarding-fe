@@ -24,19 +24,9 @@ const AssignOne = () => {
   });
   const [isUser, setIsUser] = useState(false);
   const debouncedKeyword = useDebounce(validationStatus, 150);
-
-  // test userInfo
-  useEffect(() => {
-    if (localStorage.getItem('userData') === null)
-      return localStorage.setItem(
-        'userData',
-        JSON.stringify({
-          id: 'test01@test.test',
-          pwd: '!Qwe1234',
-          auth: false,
-        })
-      );
-  }, []);
+  let auth = useAuth();
+  const id = useRef(null);
+  const pwd = useRef(null);
 
   const handleInputChange = (event, ref) => {
     ref.current.value = event.target.value;
@@ -47,48 +37,33 @@ const AssignOne = () => {
     }));
   };
 
-  let auth = useAuth();
-  const id = useRef(null);
-  const pwd = useRef(null);
-
   const [errorMsg, setErrorMsg] = useState('');
   const [errorMsgEmail, setErrorMsgEmail] = useState('');
   const [errorMsgPassword, setErrorMsgPassword] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
-  // validators
-  const isEmail = validateEmail(debouncedKeyword, setErrorMsgEmail, id);
-  const isPassword = validatePassword(
-    debouncedKeyword,
-    setErrorMsgPassword,
-    pwd
-  );
-  const validateUser = userSearch(debouncedKeyword).then((result) =>
-    setIsUser(result)
-  );
+  validateEmail(setErrorMsgEmail, id);
+  validatePassword(setErrorMsgPassword, pwd);
+  userSearch(debouncedKeyword).then((result) => setIsUser(result));
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const isBlank = validateBlank(debouncedKeyword, setErrorMsg, id, pwd);
-    console.log(
-      !isBlank,
-      errorMsgEmail === '',
-      errorMsgPassword === '',
-      isUser
-    );
-
+    // console.log(
+    //   !isBlank,
+    //   errorMsgEmail === '',
+    //   errorMsgPassword === '',
+    //   isUser,
+    //   debouncedKeyword
+    // );
     if (!isBlank && errorMsgEmail === '' && errorMsgPassword === '' && isUser) {
-      localStorage.setItem(
-        'userData',
-        JSON.stringify({
-          id: id.current.value,
-          pwd: pwd.current.value,
-          auth: true,
-        })
-      );
+      const userData = {
+        id: id.current.value,
+        pwd: pwd.current.value,
+        auth: true,
+      };
 
-      auth.signin(id.current.value, () => {
+      auth.signin(userData, () => {
         navigate(from, { replace: true });
       });
     } else {
@@ -114,7 +89,6 @@ const AssignOne = () => {
                 name="username"
                 ref={id}
                 onChange={(event) => handleInputChange(event, id)}
-                onBlur={(event) => clearValidationStatus(event, id)}
                 style={errorMsgEmail === '' ? {} : { border: '1px solid red' }}
               />
               {errorMsgPassword && (
