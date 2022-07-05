@@ -6,54 +6,77 @@ function Image(props) {
   const onLoad = () => {
     setLoading(false);
   };
-  const [add, setAdd] = React.useState(false);
-  const pRef = React.useRef(null);
-  const cRef = React.useRef(null);
+
+  const [showBtn, setShowBtn] = React.useState(false);
+  const outerRef = React.useRef(null);
+  const innerRef = React.useRef(null);
+
   const handleButtonClick = React.useCallback(
     (event) => {
       event.stopPropagation();
-      if (pRef.current === null || cRef.current === null) {
+      if (outerRef.current === null || innerRef.current === null) {
         return;
       }
-      if (pRef.current.clientHeight > 344) {
-        pRef.current.style.height = '344px';
+      if (outerRef.current.clientHeight > 384) {
+        outerRef.current.style.height = '384px';
       } else {
-        pRef.current.style.height = `${cRef.current.clientHeight}px`;
+        outerRef.current.style.height = `${innerRef.current.clientHeight}px`;
       }
-      setAdd(!add);
+      setShowBtn((state) => !showBtn);
     },
-    [add]
+    [showBtn]
   );
 
   return (
     <>
-      <ContentsWrapper ref={pRef}>
-        <img src={url} onLoad={onLoad} className="main-pic" ref={cRef} />
+      <ContentsWrapper ref={outerRef}>
+        <img
+          src={url}
+          onLoad={onLoad}
+          className="main-pic"
+          ref={innerRef}
+          id="image"
+        />
       </ContentsWrapper>
-      <div
-        className="button"
+      <AccordionButton
         onClick={handleButtonClick}
         style={
-          cRef?.current?.clientHeight < 300
-            ? { opacity: '0', transition: 'height 1s ease' }
-            : {}
+          innerRef.current?.clientHeight < 384
+            ? { display: 'none' }
+            : { display: 'flex' }
         }
+        tabIndex="-1"
       >
         더보기 버튼
-      </div>
+      </AccordionButton>
     </>
   );
 }
 export default Image;
 
 const ContentsWrapper = styled.div`
-  height: 20rem;
-  width: 100vh;
+  height: 24rem;
+  width: 100%;
   overflow: hidden;
   object-fit: cover;
-  transition: height 0.35s ease;
+  transition: height 1s ease;
   & > img {
     object-fit: cover;
-    width: 100vh;
+    width: 100%;
   }
+`;
+
+const AccordionButton = styled.div`
+  width: 100%;
+  height: 2.5rem;
+  text-align: center;
+  z-index: 10;
+  position: relative;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom: 1px solid #dbdbdb;
+  color: #139ef2;
 `;

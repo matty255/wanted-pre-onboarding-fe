@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PostCard from './PostCard';
 import axios from 'axios';
 import { FeedContext } from '../store/FeedContext';
+import PullToRefresh from 'react-simple-pull-to-refresh';
 
 const PostList = () => {
   const { feedList, getFeedList } = useContext(FeedContext);
@@ -23,12 +24,14 @@ const PostList = () => {
   return (
     <>
       <ContentBox>
-        {feedList.length > 0 &&
-          feedList.map((feed, i) => (
-            <div key={`${i}-${feed.image}`}>
-              <PostCard data={feed} />
-            </div>
-          ))}
+        <PullToRefresh onRefresh={() => callFeed()}>
+          {feedList.length > 0 &&
+            feedList.map((feed, i) => (
+              <div key={`${i}-${feed.image}`}>
+                <PostCard data={feed} />
+              </div>
+            ))}
+        </PullToRefresh>
       </ContentBox>
     </>
   );

@@ -29,6 +29,7 @@ const AssignTwo = () => {
   // scrolls
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
+  // console.log(pageY);
 
   const documentRef = useRef(document);
 

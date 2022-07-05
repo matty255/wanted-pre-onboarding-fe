@@ -2,8 +2,10 @@ import { useReducer } from 'react';
 import _ from 'lodash';
 import { ADD_COMMENT, GET_FEEDLIST } from './actions';
 
+const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+
 const getFeedList = (poke, state) => ({
-  feedList: _.uniq([...poke]),
+  feedList: shuffle(_.uniq([...poke])),
 });
 
 const feedReducer = (state, action) => {

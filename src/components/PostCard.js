@@ -101,20 +101,6 @@ const PostBox = styled.article`
       opacity: 1;
     }
   }
-
-  .button {
-    width: 100%;
-    height: 3rem;
-    text-align: center;
-    z-index: 10;
-    position: relative;
-    object-fit: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-bottom: 1px solid #dbdbdb;
-  }
 `;
 
 const PostBoxTop = styled.div`
@@ -214,37 +200,5 @@ const InnerBox = styled.div`
     line-height: 16px;
     color: black;
     margin-right: 0.5rem;
-  }
-`;
-
-const CommentSummitBox = styled.div`
-  border-top: 1px solid #dbdbdb;
-  width: 100%;
-  height: 3.7rem;
-  & > ion-icon {
-    position: absolute;
-    margin: 1.1rem 1rem;
-    font-size: 1.5rem;
-  }
-
-  & > form {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  & > form > input {
-    margin-left: 3.2rem;
-    flex-grow: 1;
-    padding-top: 1.32rem;
-    font-size: 0.9rem;
-  }
-  & > form > button {
-    width: 4rem;
-    flex-shrink: 0;
-    height: 2rem;
-    padding-top: 1.2rem;
-    font-size: 0.9rem;
-    color: #139ef2;
-    cursor: pointer;
   }
 `;
