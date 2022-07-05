@@ -4,7 +4,6 @@ import styled from 'styled-components';
 function Image(props) {
   const { url, loading, setLoading } = props;
   const onLoad = () => {
-    // console.log('loaded');
     setLoading(false);
   };
   const [add, setAdd] = React.useState(false);
@@ -26,7 +25,7 @@ function Image(props) {
     },
     [add]
   );
-  console.log(cRef?.current?.clientHeight);
+
   return (
     <>
       <ContentsWrapper ref={pRef}>
