@@ -9,15 +9,14 @@ function Image(props) {
   const [add, setAdd] = React.useState(false);
   const pRef = React.useRef(null);
   const cRef = React.useRef(null);
-
   const handleButtonClick = React.useCallback(
     (event) => {
       event.stopPropagation();
       if (pRef.current === null || cRef.current === null) {
         return;
       }
-      if (pRef.current.clientHeight > 384) {
-        pRef.current.style.height = '384px';
+      if (pRef.current.clientHeight > 344) {
+        pRef.current.style.height = '344px';
       } else {
         pRef.current.style.height = `${cRef.current.clientHeight}px`;
       }
@@ -29,15 +28,17 @@ function Image(props) {
   return (
     <>
       <ContentsWrapper ref={pRef}>
-        <img
-          src={url}
-          onLoad={onLoad}
-          className="main-pic"
-          add={add}
-          ref={cRef}
-        />
+        <img src={url} onLoad={onLoad} className="main-pic" ref={cRef} />
       </ContentsWrapper>
-      <div className="button" onClick={handleButtonClick}>
+      <div
+        className="button"
+        onClick={handleButtonClick}
+        style={
+          cRef?.current?.clientHeight < 300
+            ? { opacity: '0', transition: 'height 1s ease' }
+            : {}
+        }
+      >
         더보기 버튼
       </div>
     </>

@@ -32,7 +32,8 @@ const AssignTwo = () => {
 
   const documentRef = useRef(document);
 
-  function handleScroll() {
+  function handleScroll(event) {
+    event.stopPropagation();
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;

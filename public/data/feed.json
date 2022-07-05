@@ -16,7 +16,7 @@
     {
         "feed_index": 2,
         "nickname" : "pika_",
-        "image": "https://i.pinimg.com/originals/b6/5e/15/b65e155acbf5ebf5a2413b9081b558e3.gif",
+        "image": "https://post-phinf.pstatic.net/MjAxODAzMjJfMTU1/MDAxNTIxNjk1MjA4NjQw.0u5eFltqVGXX82UCzbq0eByAxq3SIpGMjvnh5tPHtewg.gmteItEObSTt-wbo60O9tkhdAQ3Iafj1YExJnOGwn1og.GIF/tumblr_m2nz2oZu2S1qkb6keo1_500.gif?type=w1200",
         "profile_pic": "https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031",
         "like_count": 25,
         "comment" : [{
@@ -34,27 +34,27 @@
     },
     {
         "feed_index": 3,
-        "nickname" : "pikarest",
-        "image": "https://www.ddengle.com/files/attach/images/2920390/064/286/011/d9c64016d3800de2f94cca23f4e1dc0a.gif",
+        "nickname" : "pika_",
+        "image": "https://i.pinimg.com/originals/b6/5e/15/b65e155acbf5ebf5a2413b9081b558e3.gif",
         "profile_pic": "https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031",
         "like_count": 25,
         "comment" : [{
-            "username" : "penguins34",
+            "username" : "cat_luv2",
             "profile_pic" : "https://3.bp.blogspot.com/-5b_QQCrDwV0/WSYyVxGwflI/AAAAAAAHrVk/tQszPMjDmRsoyIK8Ei98SomPTSxG_4dnQCLcB/s1600/AS002652_03.gif",
-            "comment_content" : "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+            "comment_content" : "치악력...!",
             "feed_index": 3
         }, {
-            "username" : "oreo202",
+            "username" : "pika_",
             "profile_pic" : "https://3.bp.blogspot.com/-5b_QQCrDwV0/WSYyVxGwflI/AAAAAAAHrVk/tQszPMjDmRsoyIK8Ei98SomPTSxG_4dnQCLcB/s1600/AS002652_03.gif",
-            "comment_content" : "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+            "comment_content" : "사과 맛있자나",
             "feed_index": 3
         }]
 
     },
     {
         "feed_index": 4,
-        "nickname" : "4th_level",
-        "image": "http://itcm.co.kr/files/attach/images/813/064/197/006/6e984615d541ad968556baa870b1ec79.gif",
+        "nickname" : "pikarest",
+        "image": "https://www.ddengle.com/files/attach/images/2920390/064/286/011/d9c64016d3800de2f94cca23f4e1dc0a.gif",
         "profile_pic": "https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031",
         "like_count": 25,
         "comment" : [{
@@ -73,6 +73,25 @@
     {
         "feed_index": 5,
         "nickname" : "4th_level",
+        "image": "http://itcm.co.kr/files/attach/images/813/064/197/006/6e984615d541ad968556baa870b1ec79.gif",
+        "profile_pic": "https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031",
+        "like_count": 25,
+        "comment" : [{
+            "username" : "penguins34",
+            "profile_pic" : "https://3.bp.blogspot.com/-5b_QQCrDwV0/WSYyVxGwflI/AAAAAAAHrVk/tQszPMjDmRsoyIK8Ei98SomPTSxG_4dnQCLcB/s1600/AS002652_03.gif",
+            "comment_content" : "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+            "feed_index": 5
+        }, {
+            "username" : "oreo202",
+            "profile_pic" : "https://3.bp.blogspot.com/-5b_QQCrDwV0/WSYyVxGwflI/AAAAAAAHrVk/tQszPMjDmRsoyIK8Ei98SomPTSxG_4dnQCLcB/s1600/AS002652_03.gif",
+            "comment_content" : "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+            "feed_index": 5
+        }]
+
+    },
+    {
+        "feed_index": 6,
+        "nickname" : "4th_level",
         "image": "http://m.nicetoy.co.kr/web/upload/NNEditor/20190820/mobile/c3ddb506aa1414ac01c4ce7a10acaa7a_1566284125.jpg",
         "profile_pic": "https://t1.daumcdn.net/cfile/tistory/2336D840576BC72031",
         "like_count": 25,
@@ -80,12 +99,12 @@
             "username" : "penguins34",
             "profile_pic" : "https://3.bp.blogspot.com/-5b_QQCrDwV0/WSYyVxGwflI/AAAAAAAHrVk/tQszPMjDmRsoyIK8Ei98SomPTSxG_4dnQCLcB/s1600/AS002652_03.gif",
             "comment_content" : "긴 이미지도 ok",
-            "feed_index": 5
+            "feed_index": 6
         }, {
             "username" : "oreo202",
             "profile_pic" : "https://3.bp.blogspot.com/-5b_QQCrDwV0/WSYyVxGwflI/AAAAAAAHrVk/tQszPMjDmRsoyIK8Ei98SomPTSxG_4dnQCLcB/s1600/AS002652_03.gif",
             "comment_content" : "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
-            "feed_index": 5
+            "feed_index": 6
         }]
 
     }
