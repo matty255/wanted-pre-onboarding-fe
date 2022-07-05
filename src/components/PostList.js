@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
 import axios from 'axios';
-import { FeedContext } from '../hooks/FeedContext';
+import { FeedContext } from '../store/FeedContext';
 
 const PostList = () => {
   const { feedList, getFeedList } = useContext(FeedContext);

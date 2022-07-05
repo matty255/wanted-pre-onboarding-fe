@@ -9,8 +9,8 @@ import {
   happyOutline,
 } from 'ionicons/icons';
 import styled from 'styled-components';
-import { FeedContext } from '../hooks/FeedContext';
-import { useAuth } from '../hooks/AuthContext';
+import { FeedContext } from '../store/FeedContext';
+import { useAuth } from '../store/AuthContext';
 import Image from './Image';
 
 const PostCard = ({ data }) => {
@@ -54,7 +54,7 @@ const PostCard = ({ data }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (state.comment === '') {
+    if (state.comment.trim() === '') {
       return alert('내용을 입력해주세요!');
     } else {
       addComment({ com });

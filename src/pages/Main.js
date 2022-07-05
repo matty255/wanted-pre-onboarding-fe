@@ -17,7 +17,7 @@ import InstaLogo from '../static/insta.png';
 import PostList from '../components/PostList';
 import { useNavigate } from 'react-router-dom';
 import MainSideContentsCard from '../components/MainSideContentsCard';
-import { useAuth } from '../hooks/AuthContext';
+import { useAuth } from '../store/AuthContext';
 
 const throttle = function (callback, waitTime) {
   let timerId = null;

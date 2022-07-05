@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAuth } from '../hooks/AuthContext';
+import { useAuth } from '../store/AuthContext';
 
 const MainSideContentsCard = () => {
   let auth = useAuth();

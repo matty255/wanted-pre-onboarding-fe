@@ -1,6 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
+const pattern = {
+  name: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+  password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+};
+
+export const isValidRegExp = (id, value) => {
+  const regex = new RegExp(pattern[id]);
+  return regex.test(value);
+};
+
 export const validateBlank = (state, setErrorMsg, id, pwd) => {
   const fields = [
     {
@@ -27,26 +37,15 @@ export const validateBlank = (state, setErrorMsg, id, pwd) => {
   return isNotFilled;
 };
 
-export const validateEmail = (
-  state,
-
-  setErrorMsgEmail,
-  id
-) => {
+export const validateEmail = (state, setErrorMsgEmail, id) => {
   const fields = {
     name: 'username',
     value: state.username,
     message: '이메일형식이 아닙니다.',
   };
 
-  const emailCheck = (email) => {
-    let _reg =
-      /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-Z])*.([a-zA-Z])*/;
-
-    return _reg.test(email);
-  };
   setTimeout(() => {
-    if (emailCheck(state.username) || state.username === '') {
+    if (isValidRegExp('name', state.username) || state.username === '') {
       setErrorMsgEmail('');
 
       return false;
@@ -57,23 +56,18 @@ export const validateEmail = (
 
       return true;
     }
-  }, 500);
+  }, 50);
 };
 
 export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
   const fields = {
-    name: 'username',
+    name: 'password',
     value: state.password,
     message: '비번은 8글자이상 대문자소문자특수문자 포함.',
   };
 
-  const pwdCheck = (pwd) => {
-    let _reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
-
-    return _reg.test(pwd);
-  };
   setTimeout(() => {
-    if (pwdCheck(state.password) || state.password === '') {
+    if (isValidRegExp('password', state.password) || state.password === '') {
       setErrorMsgPassWord('');
       return false;
     } else {
@@ -83,7 +77,7 @@ export const validatePassword = (state, setErrorMsgPassWord, pwd) => {
 
       return true;
     }
-  }, 500);
+  }, 50);
 };
 
 export const userSearch = async (state) => {

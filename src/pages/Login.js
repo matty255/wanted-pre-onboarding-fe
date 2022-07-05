@@ -4,7 +4,7 @@ import InstaLogo from '../static/insta.png';
 import InstaApple from '../static/instaapple.png';
 import InstaGoogle from '../static/instagoogle.png';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks/AuthContext';
+import { useAuth } from '../store/AuthContext';
 import { useDebounce } from '../hooks/useDebounce';
 
 import {
@@ -18,12 +18,12 @@ const AssignOne = () => {
   let navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || '/main';
-  const [state, setState] = useState({
+  const [validationStatus, setValidationStatus] = useState({
     username: '',
     password: '',
   });
   const [isUser, setIsUser] = useState(false);
-  const debouncedKeyword = useDebounce(state, 250);
+  const debouncedKeyword = useDebounce(validationStatus, 150);
 
   // test userInfo
   useEffect(() => {
@@ -38,9 +38,10 @@ const AssignOne = () => {
       );
   }, []);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setState((prevState) => ({
+  const handleInputChange = (event, ref) => {
+    ref.current.value = event.target.value;
+    const { name, value } = ref.current;
+    setValidationStatus((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -70,12 +71,12 @@ const AssignOne = () => {
     event.preventDefault();
 
     const isBlank = validateBlank(debouncedKeyword, setErrorMsg, id, pwd);
-    // console.log(
-    //   !isBlank,
-    //   errorMsgEmail === '',
-    //   errorMsgPassword === '',
-    //   isUser
-    // );
+    console.log(
+      !isBlank,
+      errorMsgEmail === '',
+      errorMsgPassword === '',
+      isUser
+    );
 
     if (!isBlank && errorMsgEmail === '' && errorMsgPassword === '' && isUser) {
       localStorage.setItem(
@@ -112,8 +113,8 @@ const AssignOne = () => {
                 placeholder="전화번호, 사용자 이름 또는 이메일"
                 name="username"
                 ref={id}
-                value={state.username}
-                onChange={handleInputChange}
+                onChange={(event) => handleInputChange(event, id)}
+                onBlur={(event) => clearValidationStatus(event, id)}
                 style={errorMsgEmail === '' ? {} : { border: '1px solid red' }}
               />
               {errorMsgPassword && (
@@ -125,8 +126,7 @@ const AssignOne = () => {
                 password="password"
                 name="password"
                 ref={pwd}
-                value={state.password}
-                onChange={handleInputChange}
+                onChange={(event) => handleInputChange(event, pwd)}
                 autoComplete="off"
                 style={
                   errorMsgPassword === '' ? {} : { border: '1px solid red' }
