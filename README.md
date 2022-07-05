@@ -6,7 +6,19 @@
 ## 과제 참고 이미지
 [참고 이미지 링크](https://bclef25.notion.site/1ed6d5b2192b45eeb4104a67f6a77250)
 
-과제 완료!
+과제 완료! 첫주차 과제가 리팩토링이었다니...
+
+## 리팩토링 내역
+-  [Assignment 1 - `Login`]에서 ref가 포커싱하는데에만 쓰이고 렌더링 최적화에는 1도 기여하지 않았었습니다.
+코드리뷰로 이를 발견하여 로직을 개선, useState는 [Assignment3 - `Validation`]에서 Validator 용도로만 사용하게 바꾸었습니다.
+
+- [Assignment3 - `Validation`]에서 비슷한 역할을 하는 function을 이메일, 비밀번호 용으로 몇개씩이나 만들어 사용하였고 테스트용이었던 코드의 흔적이 남아있었는데, 이를 삭제하고 공통적으로 사용되는 부분을 따로 함수로 빼서 코드를 간결하게 맞추었습니다. 정규표현식 잘못 쓴 것도 고쳤습니다.
+
+- 이와 관련하여 user.json의 더미데이터도 수정했습니다. (.뒤에는 3글자까지만 들어가야 함)
+
+- 비슷한 코드는 모아놓는 것이 좋다는 조언에 따라 [Assignment4 - `Routing`]에서 app.js에 작성했던 Routing, context 관련 함수들을 Routes.js 파일을 제작하여 분리하고 상태관리 파일들과 함께 store 폴더에 따로 담았습니다. 
+
+- [## Assignment5 - `Feeds`]에서 comment component를 분리하고 page component 안에 풀어서 작성했던 throttling 관련 함수를 hook 형태로 만들어 분리했습니다. 또한 user experience 개선을 위해 ref를 활용하여 card image accordion을 구현했습니다.
 
 ## 진행 가이드
 
